@@ -174,14 +174,14 @@ Press `Ctrl+c` (both keys together) or `Ctrl+Z` then `Enter` on Windows.
 
 Take screenshots of your charts and provide them here with a discussion.
 In Markdown, display a figure by using:
-an exclaimation mark immediately followed by square brackets containing a useful caption
+an exclamation mark immediately followed by square brackets containing a useful caption
 immediately followed by parentheses containing the relative path to your figure.
 Note: When you start typing the path with a dot (.) for "here, in this directory",
 the IDE may help complete the path.
 
 Follow this example, but the figures should
 reflect your work and include your narrative.
-Remove unnecessary instructructional comments in your final version of this README.md.
+Remove unnecessary instructional comments in your final version of this README.md.
 
 ![Correlation Heatmap](./docs/images/Figure_1.png)
 
