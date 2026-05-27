@@ -1,51 +1,52 @@
 # ============================================================
-# pyproject.toml (Python, MkDocs, and Notebooks project configuration)
+# pyproject.toml (Python project configuration)
 # ============================================================
-# VARIANT: python-mkdocs-nb
-# SOURCE: https://github.com/denisecase/templates
-
 # REQ.PYTHON: Python projects MUST include pyproject.toml as the single source of truth.
 # WHY: Centralizes project configuration.
+# CUSTOM: Update identity and build tool src folders.
+
+# ============================================================
+# SECTION 1: PROJECT IDENTITY (name, version, CUSTOM dependencies)
+# ============================================================
 
 [project]
 name = "datafun-04-notebooks" # CUSTOM: Package distribution name (use lowercase and dashes).
 readme = "README.md"
 requires-python = ">=3.14"
-version = "0.1.0"
+version = "1.1.0"
 
 dependencies = [
     # REQ.DEPS: External packages used by the project code.
-    "datafun-toolkit>=0.9.5",
-    "ipykernel>=7.1.0",
-    "ipython>=9.9.0",
-    "pandas>=3.0.0",
-    "scikit-learn>=1.3.0",
-    "seaborn>=0.13.0",
-    "matplotlib>=3.8.0"
+    "datafun-toolkit",
+    "ipykernel",
+    "ipython",
+    "pandas",
+    # "scikit-learn",
+    "seaborn",
+    "matplotlib"
 ]
 
 
 [project.optional-dependencies]
+# WHY: Optional dependency groups keep the core install clean and focused.
 dev = [
     # REQ.DEV.DEPS: External packages used for linting, testing, type checking, etc.
-    "bandit>=1.7.5",
-    "packaging>=26.0",
-    "pre-commit>=4",
-    "pytest>=9.0.2",
-    "pytest-cov>=7.0.0",
-    "pyright>=1.1",
-    "ruff>=0.9",
-    "validate-pyproject>=0.11.0",
+    "pre-commit",
+    "pyright",
+    "pytest",
+    "pytest-cov",
+    "ruff",
 ]
 
 docs = [
     # REQ.DOCS.DEPS: External packages used to generate project documentation.
-    "mike>=2.1.3",
-    "mkdocs>=1.5",
-    "mkdocs-material>=9",
-    "mkdocs-static-i18n>=1.3.0",
-    "mkdocstrings[python]>=1.0.2",
+    "mkdocstrings[python]",
+    "zensical",
 ]
+
+# ============================================================
+# SECTION 2: TOOL CONFIGURATION (Professional basics)
+# ============================================================
 
 # === PYRIGHT (TYPE CHECKING HELPS FIND COMMON ERRORS BEFORE THE CODE RUNS) ===
 
@@ -73,18 +74,18 @@ reportOptionalSubscript = "warning"
 reportPrivateUsage = "none"
 useLibraryCodeForTypes = false
 
-# Reduce more associated with EDA
+# Reduce noise associated with EDA libraries and exploratory data work
 reportUnknownMemberType = "none"
 reportUnknownArgumentType = "none"
 reportUnknownParameterType = "none"
 reportUnknownVariableType = "none"
-reportUnknownReturnType = "none"
 reportUnknownLambdaType = "none"
-reportUnknownNamedArgumentType = "none"
 
-# Environment resolution
-venv = ".venv"
+# Environment resolution - all our projects use .venv for the virtual environment.
+# Only if you CANNOT USE .venv (e.g. due to IDE limitations) should you alter these.
+# for best results, follow the pro-analytics-02 instructions exactly.
 venvPath = "."
+venv = ".venv"
 
 # === PYTEST (VERIFY LOGIC) ===
 
@@ -145,32 +146,26 @@ force-sort-within-sections = true
 "src/**/py.typed" = ["ALL"]
 "**/*.log" = ["ALL"]
 
-# === BUILD SYSTEM ===
+# === CHOOSE PROJECT DOC STYLE ===
 
-# REQ.BUILD:
-# - `build-backend` must be a build backend (setuptools or hatchling).
+[tool.ruff.lint.pydocstyle]
+# REQ: Google style is the project-wide docstring convention.
+convention = "google"   # ALT: "numpy" — choose one, never mix.
+
+# ============================================================
+# SECTION 3: BUILD SYSTEM (boilerplate; CUSTOM src/ agreement)
+# ============================================================
+#
+# REQ.PROJECT: A build system MUST be declared for package discovery and publishing.
+# REQ.STRUCTURE: All importable code MUST live under src/.
+# WHY src/ layout: Prevents accidental imports from the repo root;
+#     ensures consistent behavior across IDEs, tests, CI, and PyPI.
 
 [build-system]
-# WHY: Build system needed to create distributable packages.
-# CUSTOM: Using scm for dynamic version management.
-requires = [
-    "setuptools>=80",
-    "setuptools_scm>=9.2.2",
-]
-build-backend = "setuptools.build_meta"
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
-[tool.setuptools]
-include-package-data = true # WHY: Ensure non-code files are included in distributions.
-package-dir = {"" = "src"} # WHY: src-layout keeps code separate from config and docs.
 
-[tool.setuptools.package-data]
-"datafun_toolkit" = ["py.typed", "*.yaml"]
-
-[tool.setuptools.packages.find]
-where = ["src"] # WHY: Explicitly define package discovery location.
-
-[tool.setuptools_scm]
-tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$" # WHY: Match tags like v1.2.3 for versioning.
-fallback_version = "0.0.1"
-local_scheme = "no-local-version"
-version_file = "src/datafun_toolkit/_version.py"
+[tool.hatch.build.targets.wheel]
+# CUSTOM: Must match src/ folders.
+packages = ["src/datafun"]  # REQ.PACKAGES: Discovery rooted at src/.
