@@ -1,28 +1,26 @@
-# AGENTS.md
+# ./AGENTS.md
 
-Tooling instructions for AI assistants.
-Humans may ignore this file.
+## WHY
 
-## Companion Files
-
-Keep command sections equivalent across all:
-
-- AGENTS.md (must be in root)
-- CLAUDE.md (root or .claude/)
-- .github/copilot-instructions.md
-
-## Purpose
-
-Canonical, cross-platform workflow for this repository.
-Python is managed by uv; uv downloads Python if needed.
+- This repo uses a uniform, reproducible workflow based on **uv** and **pyproject.toml**.
+- These instructions exist to prevent tool drift (e.g., pip) and OS mismatch.
 
 ## Requirements
 
-- Use **uv only**
-- Do **not** suggest pip or venv workflows
-- Commands must be cross-platform
+- Use **uv** for all environment, dependency, and run commands in this repo.
+- Do **not** recommend or use `pip install ...` as the primary workflow.
+- This repo targets **Python 3.14**, pinned via uv.
+- Commands and guidance must work on Windows, macOS, and Linux.
+- If shell-specific commands are unavoidable, provide both:
+  - PowerShell (Windows)
+  - bash/zsh (macOS/Linux)
 
-## Setup
+## Quickstart
+
+- Install **uv** using the official method for your OS.
+- Keep uv current.
+- Pin Python 3.14 for this project using uv.
+- Sync dependencies (dev + docs) and upgrade.
 
 ```shell
 uv self update
@@ -30,26 +28,24 @@ uv python pin 3.14
 uv sync --extra dev --extra docs --upgrade
 ```
 
-## Quality
+## Common Tasks
+
+Run all commands via **uv**.
+
+Lint / format:
 
 ```shell
 uv run ruff format .
-uv run ruff check .
-uv run pyright .
-uv run pytest
+uv run ruff check . --fix
 ```
 
-## Docs
+Build documentation:
 
 ```shell
-uv run mkdocs serve
-uv run mkdocs build
+uv run python -m zensical build
 ```
 
-## Git
+## pre-commit
 
-```shell
-git add .
-git commit -m "Describe your changes"
-git push -u origin main
-```
+- pre-commit runs only on tracked / staged files.
+- Developers should `git add -A` files before expecting hooks to run.

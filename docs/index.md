@@ -1,22 +1,10 @@
 # Data Analytics Fundamentals
 
-> Professional Python for Data Analytics
+This site provides documentation for this project.
+Use the navigation to explore module-specific materials.
 
-This project comes with professional documentation.
+## How-To Guide
 
-Explore the tabs and sidebars for content.
-
-This is where we present our analytics work.
-
-See:
-
-- [Resources](./RESOURCES.md)
-- [Troubleshooting](./TROUBLESHOOTING.md)
-
----
-
-To customize, modify:
-
-- `docs/` (folder with Markdown files)
-- `mkdocs.yaml` (in the root project folder)
-  - scroll to the end for th
+Many instructions are common to all projects.
+See [⭐ **Workflow: Apply Example**](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
+to get this project running on your machine.
