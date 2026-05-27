@@ -146,7 +146,7 @@ You accidentally started Python interactive mode.
 It happens.
 Press `Ctrl+c` (both keys together) or `Ctrl+Z` then `Enter` on Windows.
 
-## Example Output
+## Example Output (Can Remove this Section after You Verify)
 
 ```shell
 | INFO | EDA | --- Section 9: Summary and next steps ---
