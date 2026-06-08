@@ -65,7 +65,7 @@ exclude = [ "**/node_modules", "**/.*", ".venv","**/__pycache__","dist","build"]
 
 # Diagnostics (type-system focused)
 reportMissingImports = "warning"
-reportMissingTypeStubs = "warning"
+reportMissingTypeStubs = "none" # WHY: Avoid noise from missing stubs for third-party libraries.
 reportIncompatibleVariableOverride = "warning"
 reportIncompatibleMethodOverride = "warning"
 reportOptionalSubscript = "warning"

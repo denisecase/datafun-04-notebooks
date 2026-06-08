@@ -98,12 +98,12 @@ code .
 
 These are listed for convenience.
 For best results, follow the detailed instructions in
-[pro-analytics-02 guide](https://denisecase.github.io/pro-analytics-02/)
-to complete:
+[pro-analytics-02 guide](https://denisecase.github.io/pro-analytics-02/).
 
 ```shell
 uv self update
 uv python pin 3.14
+uv lock --upgrade
 uv sync --extra dev --extra docs --upgrade
 
 uvx pre-commit install
